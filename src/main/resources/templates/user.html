@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Comments by Name</title>
+</head>
+<body>
+<h1>User by Name</h1>
+<form th:action="@{/users}" method="get">
+  <label for="name">Search by name:</label>
+  <input type="text" id="name" name="name" th:value="${name}">
+  <button type="submit">Search</button>
+</form>
+<table>
+  <thead>
+  <tr>
+    <th>Users</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr th:each="comment : ${users}">
+    <td th:text="${comment}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
