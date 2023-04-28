@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Comments by Name</title>
+</head>
+<body>
+<h1>Comments by Name</h1>
+<form th:action="@{/comments}" method="get">
+  <label for="name">Search by name:</label>
+  <input type="text" id="name" name="name" th:value="${name}">
+  <button type="submit">Search</button>
+</form>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr th:each="comment : ${comments}">
+    <td th:text="${comment}"></td>
+      <td th:text="${comment}"></td>
+
+  </tr>
+  </tbody>
+</table>
+<div>
+        <span th:if="${comments.hasPrevious()}">
+            <a th:href="@{/comments(name=${name}, page=${comments.number - 1})}">Previous</a>
+        </span>
+  <span th:text="${comments.number + 1}"></span>
+  <span th:if="${comments.hasNext()}">
+            <a th:href="@{/comments(name=${name}, page=${comments.number + 1})}">Next</a>
+        </span>
+</div>
+</body>
+</html>

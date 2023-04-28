@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+            color: #333;
+        }
+
+        span {
+            color: #999;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${movie.title}">Movie Title</h1>
+<p><strong>Year:</strong> <span th:text="${movie.year}">Movie Year</span></p>
+<p><strong>Genres:</strong> <span th:text="${movie.genres}">Movie Genres</span></p>
+<p><strong>Plot:</strong> <span th:text="${movie.plot}">Movie Plot</span></p>
+<p><strong>Full Plot:</strong> <span th:text="${movie.fullplot}">Movie Full Plot</span></p>
+<p><strong>Directors:</strong> <span th:text="${movie.directors}">Movie Directors</span></p>
+<p><strong>Cast:</strong> <span th:text="${movie.cast}">Movie Cast</span></p>
+<p><strong>IMDb Rating:</strong> <span th:text="${movie.imdb.rating}">IMDb Rating</span>
+</p>
+<p><strong>IMDb Votes:</strong> <span th:text="${movie.imdb.votes}">IMDb Votes</span></p>
+<p><strong>Runtime:</strong> <span th:text="${movie.runtime}">Movie Runtime</span></p>
+<p><strong>Countries:</strong> <span th:text="${movie.countries}">Movie Countries</span></p>
+<p><strong>Rated:</strong> <span th:text="${movie.rated}">Movie Rated</span></p>
+<p><strong>Awards:</strong> <span th:text="${movie.awards.text}">Movie Awards</span></p>
+<a href="/movies">Back to Movies List</a>
+
+</body>
+</html>

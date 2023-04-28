@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 3px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #337ab7;
+            text-decoration: none;
+        }
+
+        .pagination a:hover, .pagination span:hover {
+            background-color: #eee;
+            border-color: #ddd;
+        }
+
+        .pagination .active {
+            background-color: #337ab7;
+            border-color: #337ab7;
+            color: #fff;
+            cursor: default;
+        }
+
+        .pagination .disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .pagination .ellipsis {
+            margin-top: 9px;
+            padding: 0 4px;
+        }
+
+        /* Search form styles */
+        .search-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .search-form input[type="text"] {
+            flex-grow: 1;
+            padding: 6px;
+            margin-right: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-form button {
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #337ab7;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #337ab7;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background-color: #23527c;
+            border-color: #23527c;
+        }
+    </style>
+</head>
+<body>
+<h1>Movies</h1>
+
+<div class="search-form">
+    <form th:action="@{/movies}" method="get">
+        <input type="text" name="title" placeholder="Search by title" value="" />
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Genres</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+        <td><a th:href="@{/movie/{id}(id=${movie.id})}" th:text="${movie.title}">Movie Title</a></td>
+        <td th:text="${movie.year}">Movie Year</td>
+        <td th:text="${movie.genres}">Movie Genres</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span th:if="${currentPage > 0}" class="page-item">
+        <a class="page-link" th:href="@{/movies(page=${currentPage - 1}, size=${size})}">&lt;</a>
+    </span>
+    <span th:unless="${currentPage == 0}" class="page-item">
+        <a class="page-link" th:href="@{/movies(page=0, size=${size})}">1</a>
+    </span>
+    <span th:if="${currentPage > 2}" class="page-item ellipsis">
+        <a class="page-link" disabled>...</a>
+    </span>
+    <span th:if="${currentPage > 0}" class="page-item">
+        <a class="page-link" th:href="@{/movies(page=${currentPage - 1}, size=${size})}" th:text="${currentPage}"></a>
+    </span>
+    <span class="page-item active">
+        <a class="page-link" th:text="${currentPage + 1}"></a>
+    </span>
+    <span th:if="${currentPage < totalPages - 1}" class="page-item">
+        <a class="page-link" th:href="@{/movies(page=${currentPage + 1}, size=${size})}" th:text="${currentPage + 2}"></a>
+    </span>
+    <span th:if="${currentPage < totalPages - 3}" class="page-item ellipsis">
+        <a class="page-link" disabled>...</a>
+    </span>
+    <span th:unless="${currentPage == totalPages - 1}" class="page-item">
+        <a class="page-link" th:href="@{/movies(page=${totalPages - 1}, size=${size})}" th:text="${totalPages}"></a>
+    </span>
+    <span th:if="${currentPage < totalPages - 1}" class="page-item">
+        <a class="page-link" th:href="@{/movies(page=${currentPage + 1}, size=${size})}">&gt;</a>
+    </span>
+</div>
+
+</body>
+</html>
